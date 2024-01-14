@@ -1,7 +1,7 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from 'expo-status-bar'
+import { StyleSheet, Text, View } from 'react-native'
 
-export default function App() {
+const App = (): JSX.Element => {
   return (
     <View style={styles.container}>
       <Text>こんにちわ</Text>
@@ -9,8 +9,9 @@ export default function App() {
       <Text>びろーん</Text>
       <StatusBar style="auto" />
     </View>
-  );
+  )
 }
+export default App
 
 const styles = StyleSheet.create({
   container: {
@@ -18,6 +19,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    color:"#ffffff",
-  },
-});
+    color: '#fff'
+  }
+})
