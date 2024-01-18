@@ -5,4 +5,3 @@ const Layout = (): JSX.Element => {
 }
 
 export default Layout
-
