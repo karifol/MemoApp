@@ -10,7 +10,7 @@ const SignUp = (): JSX.Element => {
         <Text style={styles.title}>Sign Up</Text>
         <TextInput style={styles.input} value='Email address' />
         <TextInput style={styles.input} value='Password' />
-        <Button label='Submit' />
+        <Button label='Submit'/>
         <View style={styles.footer}>
           <Text style={styles.footerText}>Already registerd?</Text>
           <Text style={styles.footerLink}>Log in.</Text>
