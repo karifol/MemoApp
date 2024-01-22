@@ -1,62 +1,83 @@
-import { View, Text, ScrollView, StyleSheet } from 'react-native'
-import CircleButton from '../../components/CircleButton'
-import Icon from '../../components/Icon'
-import { router } from 'expo-router'
+import {View, Text, ScrollView, StyleSheet} from 'react-native'
+import {router, useLocalSearchParams} from 'expo-router'
+import { onSnapshot, doc } from 'firebase/firestore'
+import { useState, useEffect } from 'react'
 
-const handlePress = (): void => {
-  // メモ編集画面に遷移
-  router.push('/memo/edit')
+import CircleButton from '../../components/CircleButton'
+import Icon from '../../components/icon'
+import { auth, db } from '../../config'
+import { type Memo } from '../../../types/memo'
+
+const handlePress = (id: string): void => {
+    router.push({pathname: 'memo/edit', params: { id } })
 }
 
-const detail = (): JSX.Element => {
-  return (
-    <View style={styles.container}>
-      <View style={styles.memoHeader}>
-        <Text style={styles.memoTitle}>買い物リスト</Text>
-        <Text style={styles.memoDate}>2023年12月22日  10:00</Text>
-      </View>
-      <ScrollView style={styles.memoBody}>
-        <Text style={styles.memoBodyText}>
-          買い物リスト
-          ｆだｌｄｆじゃｌｄｆじゃｌｊｆだｌｆｊ
-          ｌｆだｊｌｓｆｊｌｓｊ
-        </Text>
-      </ScrollView>
-      <CircleButton onPress={handlePress} style={{ top: 60, bottom: 'auto' }} >
-        <Icon name='pencil' size={40} color='white' />
-      </CircleButton>
-    </View>
-  )
+const Detail = (): JSX.Element =>{
+    const id = String(useLocalSearchParams().id)
+    console.log(id)
+    const [ memo, setMemos] = useState<Memo | null>(null)
+    useEffect(() =>{
+        if(auth.currentUser === null) {return}
+        const ref = doc(db, `users/${auth.currentUser.uid}/memos`, id)
+        const unsubscribe = onSnapshot(ref,(memoDoc) =>{
+            const { bodyText, updateAt} = memoDoc.data() as Memo
+            setMemos({
+                id: memoDoc.id,
+                bodyText,
+                updateAt
+            })
+        })
+        return unsubscribe
+    }, [])
+    return(
+        <View style = {styles.container}>
+            <View style = {styles.memoHeader}>
+                <Text style = {styles.memoTitle} numberOfLines={1}>{memo?.bodyText}</Text>
+                <Text style = {styles.memoDate}>{memo?.updateAt.toDate().toLocaleDateString()}</Text>
+            </View>
+            <ScrollView style = {styles.memoBody}>
+                <Text style = {styles.memoBodyText}>
+                    {memo?.bodyText}
+                </Text>
+            </ScrollView>
+            <CircleButton onPress={() => handlePress(id)} style={{ top: 160, bottom: 'auto' }}>
+                <Icon name='pencil' size={40} color='#ffffff'/>
+            </CircleButton>
+        </View>
+    )
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff'
-  },
-  memoHeader: {
-    height: 100,
-    backgroundColor: '#457FD3',
-    justifyContent: 'center',
-    padding: 10
-  },
-  memoTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#fff',
-    marginBottom: 4
-  },
-  memoDate: {
-    fontSize: 12,
-    color: '#fff'
-  },
-  memoBody: {
-    padding: 32
-  },
-  memoBodyText: {
-    fontSize: 14,
-    lineHeight: 24
-  }
+    container:{
+        flex: 1,
+        backgroundColor: '#ffffff'
+    },
+    memoHeader:{
+        backgroundColor: '#467FD3',
+        height: 104,
+        justifyContent: 'center',
+        paddingVertical: 24,
+        paddingHorizontal: 19
+    },
+    memoTitle:{
+        color: '#ffffff',
+        fontSize: 20,
+        lineHeight: 32,
+        fontWeight: 'bold'
+    },
+    memoDate:{
+        color: '#ffffff',
+        fontSize: 12,
+        lineHeight: 16
+    },
+    memoBody:{
+        paddingHorizontal: 27
+    },
+    memoBodyText:{
+        fontSize: 16,
+        lineHeight: 24,
+        color: '#000000'
+    }
 })
 
-export default detail
+export default Detail

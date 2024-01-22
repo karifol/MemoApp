@@ -17,7 +17,7 @@
     "expo-linking": "~5.0.2",
     "expo-router": "^2.0.0",
     "expo-status-bar": "~1.6.0",
-    "firebase": "^10.7.2",
+    "firebase": "^10.7.1",
     "react": "18.2.0",
     "react-native": "0.72.6",
     "react-native-gesture-handler": "~2.12.0",
@@ -34,6 +34,7 @@
     "eslint-plugin-n": "^16.6.2",
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-react": "^7.33.2",
+    "eslit": "^6.0.0",
     "typescript": "^5.3.3"
   },
   "private": true
