@@ -1,19 +1,46 @@
-import { View, Text, StyleSheet, TextInput } from 'react-native'
-import Header from '../../components/Header'
+import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
 import Button from '../../components/Button'
+import { Link, router } from 'expo-router'
+import { useState } from 'react'
+
+const handlePress = (): void => {
+  // サインアップ
+  router.push('/memo/list')
+}
 
 const SignUp = (): JSX.Element => {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   return (
     <View style={styles.container}>
-      <Header />
       <View style={styles.inner}>
         <Text style={styles.title}>Sign Up</Text>
-        <TextInput style={styles.input} value='Email address' />
-        <TextInput style={styles.input} value='Password' />
-        <Button label='Submit'/>
+        <TextInput
+          style={styles.input}
+          value={email}
+          onChange={(event): void => { setEmail(event.nativeEvent.text) }}
+          autoCapitalize='none'
+          keyboardType='email-address'
+          placeholder='Email Address'
+          textContentType='emailAddress'
+        />
+        <TextInput
+          style={styles.input}
+          value={password}
+          onChange={(event): void => { setPassword(event.nativeEvent.text) }}
+          autoCapitalize='none'
+          secureTextEntry
+          placeholder='Password'
+          textContentType='password'
+        />
+        <Button label='Submit'onPress={handlePress} />
         <View style={styles.footer}>
           <Text style={styles.footerText}>Already registerd?</Text>
-          <Text style={styles.footerLink}>Log in.</Text>
+          <Link href='/auth/log_in' asChild>
+            <TouchableOpacity>
+              <Text style={styles.footerLink}>log in.</Text>
+            </TouchableOpacity>
+          </Link>
         </View>
       </View>
     </View>
