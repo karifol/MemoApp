@@ -4,7 +4,7 @@ import {
 } from 'react-native'
 import { Link, router } from 'expo-router'
 import { useState } from 'react'
-import { signInWithEmailAndPassword } from 'firebase/auth'
+import { signInWithEmailAndPassword, signInAnonymously } from 'firebase/auth'
 
 import { auth } from '../../config'
 import Button from '../../components/Button'
@@ -13,6 +13,16 @@ const handlePress = (email: string, password: string): void => {
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       console.log(userCredential.user.uid)
+      router.replace('/memo/list')
+    })
+    .catch(() => {
+      Alert.alert('メールアドレスまたはパスワードが正しくありません。')
+    })
+}
+
+const handlePressAnonymous = (): void => {
+  signInAnonymously(auth)
+    .then((userCredential) => {
       router.replace('/memo/list')
     })
     .catch((error) => {
@@ -55,6 +65,11 @@ const LogIn = (): JSX.Element => {
               <Text style = {styles.footerLink}>こちら</Text>
             </TouchableOpacity>
           </Link>
+        </View>
+        <View>
+          <TouchableOpacity onPress={handlePressAnonymous}>
+            <Text style = {styles.footerLink}>ログインせずに続ける</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </View>

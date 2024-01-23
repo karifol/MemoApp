@@ -18,7 +18,16 @@ const handlePress = (email: string, password: string): void => {
     .catch((error) => {
       const { code, message } = error
       console.log(code, message)
-      Alert.alert(String(message))
+      if (code === 'auth/weak-password') {
+        Alert.alert('パスワードは6文字以上で入力してください。')
+      } else if (code === 'auth/email-already-in-use') {
+        Alert.alert('このメールアドレスは既に登録されています。')
+      } else if (code === 'auth/invalid-email') {
+        Alert.alert('メールアドレスの形式が正しくありません。')
+      } else if (code === 'auth/missing-password') {
+        Alert.alert('パスワードを入力してください。')
+      }
+      Alert.alert('登録に失敗しました。')
     })
 }
 
