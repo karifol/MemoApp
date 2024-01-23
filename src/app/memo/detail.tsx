@@ -13,12 +13,12 @@ const handlePress = (id: string): void => {
 }
 
 const Detail = (): JSX.Element => {
-  const id = String(useLocalSearchParams().id)
-  console.log(id)
+  const { id } = useLocalSearchParams()
   const [memo, setMemos] = useState<Memo | null>(null)
+
   useEffect(() => {
     if (auth.currentUser === null) { return }
-    const ref = doc(db, `users/${auth.currentUser.uid}/memos`, id)
+    const ref = doc(db, `users/${auth.currentUser.uid}/memos`, String(id))
     const unsubscribe = onSnapshot(ref, (memoDoc) => {
       const { bodyText, updateAt } = memoDoc.data() as Memo
       setMemos({
@@ -29,6 +29,7 @@ const Detail = (): JSX.Element => {
     })
     return unsubscribe
   }, [])
+
   return (
     <View style = {styles.container}>
       <View style = {styles.memoHeader}>
@@ -40,7 +41,7 @@ const Detail = (): JSX.Element => {
             {memo?.bodyText}
           </Text>
       </ScrollView>
-      <CircleButton onPress={() => { handlePress(id) }} style={{ top: 160, bottom: 'auto' }}>
+      <CircleButton onPress={() => { handlePress(String(id)) }} style={{ top: 160, bottom: 'auto' }}>
         <Icon name='pencil' size={40} color='#ffffff'/>
       </CircleButton>
     </View>
@@ -76,7 +77,8 @@ const styles = StyleSheet.create({
   memoBodyText: {
     fontSize: 16,
     lineHeight: 24,
-    color: '#000000'
+    color: '#000000',
+    paddingVertical: 32
   }
 })
 

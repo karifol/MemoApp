@@ -32,13 +32,14 @@ const Edit = (): JSX.Element => {
     const ref = doc(db, `users/${auth.currentUser.uid}/memos`, id)
     getDoc(ref)
       .then((docRef) => {
-        const RemoteBodyText = docRef?.data()?.bodyText
+        const RemoteBodyText = String(docRef?.data()?.bodyText)
         setBodyText(RemoteBodyText)
       })
       .catch((error) => {
         console.log(error)
       })
   }, [])
+
   return (
     <KeyboardAvoidingView style = {styles.container}>
       <View style = {styles.inputContainer}>
@@ -57,21 +58,21 @@ const Edit = (): JSX.Element => {
 }
 
 const styles = StyleSheet.create({
-    container:{
-        flex: 1,
-        backgroundColor: '#ffffff'
-    },
-    inputContainer:{
-        flex: 1
-    },
-    input:{
-        flex: 1,
-        textAlignVertical: 'top',
-        fontSize: 16,
-        lineHeight: 24,
-        paddingVertical: 32,
-        paddingHorizontal: 27,
-    }
+  container: {
+    flex: 1,
+    backgroundColor: '#ffffff'
+  },
+  inputContainer: {
+    flex: 1
+  },
+  input: {
+    flex: 1,
+    textAlignVertical: 'top',
+    fontSize: 16,
+    lineHeight: 24,
+    paddingVertical: 32,
+    paddingHorizontal: 27
+  }
 })
 
 export default Edit

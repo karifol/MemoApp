@@ -45,8 +45,7 @@ const KeyboardSafeView = ({ children, style }) => {
   const handleLayout = ({ nativeEvent }) => {
     if (!initialViewHeight.current) {
       const { height } = nativeEvent.layout
-      // keep viewHeight as null not to trigger useEffect on mounting.
-      // Don't do this: setViewHeight(height);
+
       initialViewHeight.current = height
       animatedViewHeight.current = new Animated.Value(height)
     }
