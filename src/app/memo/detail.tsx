@@ -2,7 +2,6 @@ import { View, Text, ScrollView, StyleSheet } from 'react-native'
 import { router, useLocalSearchParams } from 'expo-router'
 import { onSnapshot, doc } from 'firebase/firestore'
 import { useState, useEffect } from 'react'
-
 import CircleButton from '../../components/CircleButton'
 import Icon from '../../components/icon'
 import { auth, db } from '../../config'
@@ -54,7 +53,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff'
   },
   memoHeader: {
-    backgroundColor: '#467FD3',
+    backgroundColor: '#3A822E',
     height: 104,
     justifyContent: 'center',
     paddingVertical: 24,
