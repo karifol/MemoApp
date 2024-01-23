@@ -1,7 +1,6 @@
 import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native'
 import { Link } from 'expo-router'
 import { deleteDoc, doc } from 'firebase/firestore'
-
 import Icon from './icon'
 import { type Memo } from '../../types/memo'
 import { db, auth } from '../config'
@@ -13,18 +12,19 @@ interface Props {
 const handlePress = (id: string): void => {
   if (auth.currentUser === null) { return }
   const ref = doc(db, `users/${auth.currentUser.uid}/memos`, id)
-  Alert.alert('ssss', '', [
+  Alert.alert('メモを削除します', 'よろしいですか？', [
     {
-      text: 'ss',
+      text: 'はい',
       style: 'destructive',
       onPress: () => {
-        deleteDoc(ref).catch(() => {
-          Alert.alert('fds')
-        })
+        deleteDoc(ref)
+          .catch(() => {
+            Alert.alert('削除に失敗しました')
+          })
       }
     },
     {
-      text: 'sdfs'
+      text: 'いいえ'
     }
   ])
 }

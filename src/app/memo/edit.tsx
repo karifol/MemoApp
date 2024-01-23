@@ -2,7 +2,6 @@ import { View, TextInput, StyleSheet, Alert } from 'react-native'
 import { router, useLocalSearchParams } from 'expo-router'
 import { useState, useEffect } from 'react'
 import { doc, getDoc, setDoc, Timestamp } from 'firebase/firestore'
-
 import CircleButton from '../../components/CircleButton'
 import Icon from '../../components/icon'
 import { db, auth } from '../../config'
@@ -59,8 +58,7 @@ const Edit = (): JSX.Element => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#ffffff'
+    flex: 1
   },
   inputContainer: {
     flex: 1
