@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "MemoApp",
-    "slug": "MemoApp",
+    "name": "SimpleMemo",
+    "slug": "SimpleMemo",
     "scheme": "memo-app",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -17,11 +17,11 @@
     ],
     "ios": {
       "supportsTablet": false,
-      "bundleIdentifier": "jp.workabroad.memoapp",
+      "bundleIdentifier": "jp.hogehoge.simpleMemoApp",
       "buildNumber": "1.0.0"
     },
     "android": {
-      "package": "jp.workabroad.memoapp",
+      "package": "jp.hogehoge.simpleMemoApp",
       "versionCode": 1,
       "permissions": [],
       "adaptiveIcon": {
