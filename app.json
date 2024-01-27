@@ -26,7 +26,7 @@
       "permissions": [],
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "./assets/backColor.png"
+        "backgroundColor": "#000000"
       }
     },
     "web": {
@@ -34,6 +34,14 @@
     },
     "plugins": [
       "expo-router"
-    ]
+    ],
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "f62290ac-07c9-429d-9c24-e5a6be450a26"
+      }
+    }
   }
 }
