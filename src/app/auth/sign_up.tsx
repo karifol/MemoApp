@@ -9,10 +9,8 @@ import { auth } from '../../config'
 import Button from '../../components/Button'
 
 const handlePress = (email: string, password: string): void => {
-  console.log(email, password)
   createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredintial) => {
-      console.log(userCredintial.user.uid)
+    .then(async (userCredintial) => {
       router.replace('/memo/list')
     })
     .catch((error) => {

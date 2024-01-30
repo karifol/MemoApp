@@ -8,8 +8,11 @@ import { signInWithEmailAndPassword, signInAnonymously } from 'firebase/auth'
 
 import { auth } from '../../config'
 import Button from '../../components/Button'
+import { requestTrackingPermissionsAsync } from 'expo-tracking-transparency'
 
-const handlePress = (email: string, password: string): void => {
+const handlePress = async (email: string, password: string): void => {
+  const { granted } = await requestTrackingPermissionsAsync()
+  console.log(granted)
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       console.log(userCredential.user.uid)

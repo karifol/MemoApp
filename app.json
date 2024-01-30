@@ -3,7 +3,7 @@
     "name": "SimpleMemo",
     "slug": "SimpleMemo",
     "scheme": "memo-app",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -18,7 +18,10 @@
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "jp.hogehoge.simpleMemoApp",
-      "buildNumber": "1.0.0"
+      "buildNumber": "1.0.2",
+      "infoPlist": {
+        "NSUserTrackingUsageDescription": "We use Tracking to fix bugs and improve your experience."
+      }
     },
     "android": {
       "package": "jp.hogehoge.simpleMemoApp",
@@ -33,7 +36,8 @@
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
-      "expo-router"
+      "expo-router",
+      "expo-tracking-transparency"
     ],
     "extra": {
       "router": {
